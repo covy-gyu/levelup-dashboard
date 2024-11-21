@@ -24,19 +24,35 @@ export default function Page() {
 
                     {/* 로그인 및 회원가입 링크 */}
                     <div className="flex gap-2">
-                        <Link href="/login" className="...">
-                            로그인 <ArrowRightIcon ... />
+                        <Link
+                            href="/login"
+                            className="flex items-center self-start gap-2 px-6 py-3 text-sm font-medium text-white transition-colors bg-blue-500 rounded-lg hover:bg-blue-400 md:text-base">
+                            로그인 <ArrowRightIcon className="w-5 md:w-6" />
                         </Link>
-                        <Link href="/signup" className="...">
-                            회원가입 <UserPlusIcon .../>
+                        <Link
+                            href="/signup"
+                            className="flex items-center self-start gap-2 px-6 py-3 text-sm font-medium text-white transition-colors bg-blue-500 rounded-lg hover:bg-blue-400 md:text-base">
+                            회원가입 <UserPlusIcon className="w-5 md:w-6" />
                         </Link>
                     </div>
                 </div>
 
                 {/* 반응형 이미지 섹션 */}
                 <div className="flex items-center justify-center p-6 md:w-4/5 md:px-70 md:py-12">
-                    <Image src="/hero-desktop.png" ... />
-                    <Image src="/hero-mobile.png" ... />
+                    <Image
+                        src="/hero-desktop.png"
+                        width={1000}
+                        height={760}
+                        className="hidden md:block"
+                        alt="Screenshots of the dashboard project showing desktop version"
+                    />
+                    <Image
+                        src="/hero-mobile.png"
+                        width={560}
+                        height={620}
+                        className="block md:hidden"
+                        alt="Screenshot of the dashboard project showing mobile version"
+                    />
                 </div>
             </div>
         </main >

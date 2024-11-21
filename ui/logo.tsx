@@ -5,7 +5,7 @@ export default function LevelupLogo() {
     return (
         <Link href="/">
             <div className="flex flex-row items-center text-white">
-                <ChartBarIcon className="..." />
+                <ChartBarIcon className="w-5 md:w-6" />
                 <p className="...">Dashboard</p>
             </div>
         </Link>
