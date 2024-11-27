@@ -11,14 +11,18 @@ import { User } from "@/types/definitions";
 
 const EmailSchema = z.string().email({message: 'Invalid email address.'});
 const PasswordSchema = z.string().min(6, {message: 'Password must be at least 6 characters long.'});
-const NameShema = z.string().min(1, {message: 'Name cannot be empty.'});
+const NameSchema = z.string().min(1, {message: 'Name cannot be empty.'});
 
 export async function signUp(prevState: string|undefined, formData: FormData)
 {
     // 각 필드 유효성 검사
     const emailValidation = EmailSchema.safeParse(formData.get('email'));
     const passwordValidation = PasswordSchema.safeParse(formData.get('password'));
-    const nameValidation = NameShema.safeParse(formData.get('name'));
+    const nameValidation = NameSchema.safeParse(formData.get('name'));
+
+    if (!emailValidation.success) return emailValidation.error.message;
+    if (!passwordValidation.success) return passwordValidation.error.message;
+    if (!nameValidation.success) return nameValidation.error.message;
 
     const email = emailValidation.data;
     const password = passwordValidation.data;
@@ -28,7 +32,7 @@ export async function signUp(prevState: string|undefined, formData: FormData)
     try {
         // 이메일 중복 검사
         const existingUser = await sql`SELECT * FROM users WHERE email = ${email}`;
-        if(existingUser.rowCount > 0) {return 'Email already exists.';}
+        if(existingUser?.rowCount > 0) {return 'Email already exists.';}
 
         // 비밀번호 해싱 및 사용자 추가
         const hashedPassword = await bcrypt.hash(password, 10);
